@@ -22,7 +22,7 @@ public class AppointmentScheduler {
      */
     public boolean book(Appointment requested) {
 
-        if (requested.getStartMinutes() < 480 || requested.getEndMinutes() >= 1020) {
+        if (requested.getStartMinutes() < 480 || requested.getEndMinutes() > 1020) {
             return false;
         }
 
@@ -67,8 +67,11 @@ public class AppointmentScheduler {
      * Then print each appointment.toFileLine().
      */
     public void write(PrintWriter out) {
-        // TODO: Implement writing. Keep this exception until your code is ready.
-        throw new UnsupportedOperationException("write() not implemented");
+        out.println(FILE_HEADER);
+
+        for (Appointment a : schedule) {
+            out.println(a.toFileLine());
+        }
     }
 
     /** PROVIDED: loading is deliberately independent of unfinished student methods. */
