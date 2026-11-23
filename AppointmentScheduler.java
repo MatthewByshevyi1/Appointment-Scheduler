@@ -40,19 +40,25 @@ public class AppointmentScheduler {
 
     /** TODO 2: Print appointments chronologically, or an empty-schedule message. */
     public void printSchedule() {
-        // TODO: Use the TreeSet's sorted iteration order.
+        if (schedule.isEmpty()) {
+            System.out.println("The schedule is empty.");
+        }
+        else {
+            for (Appointment a : schedule) {
+                System.out.println(a);
+            }
+        }
     }
 
     /** TODO 3: Cancel the appointment that STARTS at the given minute, if any. */
     public boolean cancel(int startMinutes) {
-        // TODO: A temporary Appointment.keyAt(startMinutes) can act as a search key.
-        return false;
+        Appointment comparer = Appointment.keyAt(startMinutes);
+        return schedule.remove(comparer);
     }
 
     /** TODO 4: Return the earliest appointment beginning at or after time. */
     public Appointment nextAtOrAfter(int minutes) {
-        // TODO: TreeSet.ceiling(Appointment.keyAt(minutes)) is useful.
-        return null;
+        return schedule.ceiling(Appointment.keyAt(minutes));
     }
 
     /**
