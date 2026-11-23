@@ -21,8 +21,21 @@ public class AppointmentScheduler {
      * just the adjacent appointments. Return true only if added.
      */
     public boolean book(Appointment requested) {
-        // TODO: Check hours, previous neighbor, next neighbor; add if valid.
-        return false;
+
+        if (requested.getStartMinutes() < 480 || requested.getEndMinutes() >= 1020) {
+            return false;
+        }
+
+        Appointment low = schedule.floor(requested);
+        if (low != null && low.getEndMinutes() > requested.getStartMinutes()) {
+            return false;
+        }
+
+        Appointment high = schedule.ceiling(requested);
+        if (high != null && high.getStartMinutes() < requested.getEndMinutes()) {
+            return false;
+        }
+        return schedule.add(requested);
     }
 
     /** TODO 2: Print appointments chronologically, or an empty-schedule message. */
